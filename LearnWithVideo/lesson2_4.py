@@ -1,3 +1,7 @@
+# class Developer(object):
+#     pass
+
+
 class Developer(object):
     name = 'mike'
     age = 123
@@ -12,8 +16,11 @@ class Developer(object):
 
     def get_sex(self):
         return self.__sex
-    def set_sex(self,sex):
+
+    def set_sex(self, sex):
         self.__sex = sex
 
-    if __name__ == '__main__':
-        developer = Developer('e3535','sfsf',1)
+
+if __name__ == '__main__':
+    developer = Developer('e3535', 234, 0)
+    print(developer.get_sex())
