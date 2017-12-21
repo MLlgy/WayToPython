@@ -1,0 +1,15 @@
+import sqlite3
+conn = sqlite3.connect('testpy.db')
+cursor = conn.cursor()
+# conn.execute('CREATE TABLE user (id varchar(20) PRIMARY KEY ,name varchar(29))')
+# cursor.execute('INSERT INTO user (id,name) VALUES (\'1\', \'Michael\')')
+# print(cursor.rowcount)
+# cursor.close()
+# conn.commit()
+# conn.close()
+
+cursor.execute('SELECT * FROM user WHERE id = ?',('1',))
+value = cursor.fetchall()
+print(value)
+cursor.close()
+conn.close()
