@@ -57,7 +57,7 @@ def query_table():
     try:
         cursor.execute(sql)
         result = cursor.fetchone()
-        print('查询一条数据为： id =%d, name =%s, job =%s' % (result[0]), result[1], result[2])
+        # print('查询一条数据为： id =%d, name =%s, job =%s' % (result[0]), result[1], result[2])
         cursor.scroll(0, mode='absolute')
         results = cursor.fetchall()
         data = {}
@@ -79,7 +79,67 @@ def query_table():
         querty_db.close()
 
 
+def query_table(dev_id):
+    querty_db = pymysql.connect(host='localhost',
+                                user='root',
+                                password='root',
+                                db='py3learn')
+    cusor = querty_db.cursor()
+    sql = 'select * from dev where id=%s'
+    try:
+        cusor.execute(sql,dev_id)
+        querty_db.commit()
+        return cusor.fetchall()
+    except BaseException as e:
+        querty_db.rollback()
+        print(e)
+    finally:
+        querty_db.commit()
+        cusor.close()
+
+
+
+def update_table():
+    db = pymysql.connect(host='localhost',
+                         user='root',
+                         password='root',
+                         db='py3learn')
+    sql = 'update dev set name=%s where id=%s'
+    cursor = db.cursor()
+    try:
+        value = ('aline', 1)
+        cursor.execute(sql, value)
+        db.commit()
+        print('update table success')
+    except BaseException as e:
+        db.rollback()
+        print(e)
+    finally:
+        cursor.close()
+        db.cursor()
+
+
+def delete_table():
+    db = pymysql.connect(host='localhost',
+                         user='root',
+                         password='root',
+                         db='py3learn')
+    sql = 'delete from dev where id=%s'
+    cursor = db.cursor()
+    try:
+        cursor.execute(sql, 3)
+        db.commit()
+    except BaseException as e:
+        db.rollback()
+        print(e)
+    finally:
+        cursor.close()
+        db.close()
+
+
 if __name__ == '__main__':
     # create_table()
     insert_table()
     query_table()
+    update_table()
+    delete_table()
