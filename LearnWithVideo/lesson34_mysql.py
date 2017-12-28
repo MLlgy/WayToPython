@@ -58,6 +58,7 @@ def query_table():
         cursor.execute(sql)
         result = cursor.fetchone()
         # print('查询一条数据为： id =%d, name =%s, job =%s' % (result[0]), result[1], result[2])
+        # print('查询一条数据为： id =%%d, name =%%s, job =%%s' % (result[0]), result[1], result[2])
         cursor.scroll(0, mode='absolute')
         results = cursor.fetchall()
         data = {}
